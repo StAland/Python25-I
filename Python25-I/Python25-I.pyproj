@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>750b16e7-8255-456e-8015-187325d98cbb</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Rechnen.py</StartupFile>
+    <StartupFile>Python25_I.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
