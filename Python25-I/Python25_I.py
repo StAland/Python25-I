@@ -18,6 +18,8 @@ variable1 = "Hallo"
 
 ergebnis4 = variable1
 
+#Konvertierungen
+
 string1 = "Hallo"
 int1 = 4
 kombinierter_string = string1 + str(int1)
