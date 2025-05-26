@@ -41,4 +41,10 @@
 # print(float5)
 
 name = input("Bitte gebe deinen Namen ein: ")
-print("Dein Name ist: " + name)
+
+
+if name == "Steffen":
+    print("Hallo Steffen")
+else:
+    print("Dein Name ist: " + name)
+print("Das ist nicht mehr Teil der Verzweigung")
