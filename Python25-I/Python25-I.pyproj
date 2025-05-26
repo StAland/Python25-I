@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>750b16e7-8255-456e-8015-187325d98cbb</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Python25_I.py</StartupFile>
+    <StartupFile>Rechnen.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,6 +23,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Python25_I.py" />
+    <Compile Include="Rechnen.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
