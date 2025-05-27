@@ -40,11 +40,25 @@
 
 # print(float5)
 
-name = input("Bitte gebe deinen Namen ein: ")
 
+def begruessen():
+    name = input("Bitte gebe deinen Namen ein: ")
+    if name == "Steffen":
+        print("Hallo Steffen")
+    else:
+        print("Dein Name ist: " + name)
+    print("Das ist nicht mehr Teil der Verzweigung")
+    
+def addieren(zahl1, zahl2):
+    print("Wir addieren ", zahl1, " und ", zahl2)
+    return zahl1 + zahl2
 
-if name == "Steffen":
-    print("Hallo Steffen")
-else:
-    print("Dein Name ist: " + name)
-print("Das ist nicht mehr Teil der Verzweigung")
+def main():
+    xint = 12
+    yint = 13
+    ergebnis = addieren(xint, yint)
+    print(ergebnis)
+    ergebnis = addieren(3, 7)
+    begruessen()
+
+main()
