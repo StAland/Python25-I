@@ -1,36 +1,17 @@
-def countdown(n):
-    while n >= 0:
-        print(n)
-        n -= 1
-        
-def countup(n):
-    for zahl in range(0, n+1, 1):   
-        print(zahl)
-
-def fac_iterativ(n):
-    ergebnis = 1
-    while n > 1:
-        ergebnis *= n
-        n -= 1
-    return ergebnis
-
-def array_ausgabe(n):
-    for element in n:
-        print(element)
-        
-def gib_Steffen_ein():
-    eingabe = ""
-    while eingabe != "Steffen":
-        eingabe = input("Gib Steffen ein: ")
+def fib_iterativ(n):
+    if n < 1:
+        print("Bitte eine Zahl von mindestens 1 uebergeben")
+        return
+    elif n == 1 or n == 2:
+        return 1
+    fibs = [1, 1]
+    for i in range (3, n+1, 1):
+        fibs.append(fibs[i-3] + fibs[i-2])
+    return fibs[n-1]
 
 def main():
-    #countdown(19)
-    #print(fac_iterativ(10))
-    #countup(15)
-    # ar = [1, 6, 9, 10, "Hallo", 3.15]
-    # ar[2] = 7
-    # array_ausgabe(ar)
-    gib_Steffen_ein()
+    ergebnis = fib_iterativ(500)
+    print(ergebnis)
 
 
 main()
