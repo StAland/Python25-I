@@ -1,64 +1,19 @@
-# print("Hello world")
-# print("Auch Hallo")
-
-# PI = 3.14 #Konstante wird aber nicht forciert
-
-# variable1 = 3 #Integer
-# variable2 = "Hello World" #string
-# variable3 = 3.75 #float
-# variable4 = 'v' #char
-# variable5 = True #boolean
-
-# ergebnis1 = 3+5
-# ergebnis2 = 3>5
-# ergebnis3 = variable1 == 3
-
-# variable1 = 5
-# variable1 = "Hallo"
-
-# ergebnis4 = variable1
-
-# #Konvertierungen
-
-# string1 = "Hallo"
-# int1 = 4
-# kombinierter_string = string1 + str(int1)
-
-# string2 = "2"
-# int2 = 5
-# ergebnis_mult = int2 * int(string2)
-
-# #das funktioniert nicht
-# #string3 = "2.15"
-# #int3 = int(string3)
-
-# float4 = 2.15
-# int4 = int(float4)
-
-# string5 = "2.15"
-# float5 = float(string5)
-
-# print(float5)
+def umfang(radius):
+    PI = 3.14
+    return 2*PI*radius
 
 
-def begruessen():
-    name = input("Bitte gebe deinen Namen ein: ")
-    if name == "Steffen":
-        print("Hallo Steffen")
-    else:
-        print("Dein Name ist: " + name)
-    print("Das ist nicht mehr Teil der Verzweigung")
-    
 def addieren(zahl1, zahl2):
-    print("Wir addieren ", zahl1, " und ", zahl2)
-    return zahl1 + zahl2
+    ergebnis = zahl1 + zahl2
+    print(zahl1, "+", zahl2,"=",ergebnis)
+    return ergebnis
 
 def main():
-    xint = 12
-    yint = 13
-    ergebnis = addieren(xint, yint)
-    print(ergebnis)
-    ergebnis = addieren(3, 7)
-    begruessen()
+    addieren(13, 12)
+    addieren(1.2, 12)
+    ergebnis = umfang(10)
+    print("Der Umfang betraegt: ", ergebnis)
+
+
 
 main()
