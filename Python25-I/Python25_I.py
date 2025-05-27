@@ -1,19 +1,13 @@
-def umfang(radius):
-    PI = 3.14
-    return 2*PI*radius
-
-
-def addieren(zahl1, zahl2):
-    ergebnis = zahl1 + zahl2
-    print(zahl1, "+", zahl2,"=",ergebnis)
+def fakultaet(zahl):
+    if zahl <= 1:
+        return 1
+    ergebnis = zahl * fakultaet(zahl-1)
     return ergebnis
 
-def main():
-    addieren(13, 12)
-    addieren(1.2, 12)
-    ergebnis = umfang(10)
-    print("Der Umfang betraegt: ", ergebnis)
 
+def main():
+    ergebnis = fakultaet(6)
+    print("Das Ergebnis ist: ", ergebnis)
 
 
 main()
