@@ -1,24 +1,15 @@
-import random
-
-def wuerfeln():
-    random.seed()
-    zahl = random.randint(1, 6) # Int
-    zahl = random.random() # float zwischen 0 und 1
-    zahl = random.uniform(2.5, 9.1) # float zwischen a und b
-    zahl = random.gauss(5, 2)
-    return zahl
-
-def messwerte_simulieren(anzahl, minwert, maxwert):
-    messwerte = []
-    random.seed()
-    for i in range(0, anzahl):
-        zahl = random.uniform(minwert, maxwert)
-        messwerte.append(round(zahl, 2))
-    return messwerte
 
 def main():
-    messwerte = messwerte_simulieren(75, -10, 40)
-    print(messwerte)
-
+    notenliste = {"Dirk": 3.7, "John": 2.0, "Michael": 1.3}
+    notenliste["Michael"] = 1.7
+    notenliste["Jessica"] = 1.0
+    notenliste2 = {"Steffen": 4.0, "John": 1.7}
+    notenliste.update(notenliste2)  
+    notenliste3 = notenliste.copy()
+    noteSteffen = notenliste.pop("Steffen")
+    del notenliste["Dirk"]
+    notenliste.clear()
+    print(notenliste3)
+    print(notenliste)
 
 main()
