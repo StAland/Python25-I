@@ -1,17 +1,24 @@
-def fib_iterativ(n):
-    if n < 1:
-        print("Bitte eine Zahl von mindestens 1 uebergeben")
-        return
-    elif n == 1 or n == 2:
-        return 1
-    fibs = [1, 1]
-    for i in range (3, n+1, 1):
-        fibs.append(fibs[i-3] + fibs[i-2])
-    return fibs[n-1]
+import random
+
+def wuerfeln():
+    random.seed()
+    zahl = random.randint(1, 6) # Int
+    zahl = random.random() # float zwischen 0 und 1
+    zahl = random.uniform(2.5, 9.1) # float zwischen a und b
+    zahl = random.gauss(5, 2)
+    return zahl
+
+def messwerte_simulieren(anzahl, minwert, maxwert):
+    messwerte = []
+    random.seed()
+    for i in range(0, anzahl):
+        zahl = random.uniform(minwert, maxwert)
+        messwerte.append(round(zahl, 2))
+    return messwerte
 
 def main():
-    ergebnis = fib_iterativ(500)
-    print(ergebnis)
+    messwerte = messwerte_simulieren(75, -10, 40)
+    print(messwerte)
 
 
 main()
