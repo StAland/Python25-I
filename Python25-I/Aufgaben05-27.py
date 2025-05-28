@@ -53,11 +53,27 @@ def zaehle_zeichen(text, zeichen):
     print("Das Zeichen ", zeichen, " kommt ", anzahl, "x vor")
 
 def ist_prim(n):
+    print("Aufgabe 8:")
     m = int(n ** 0.5)
     for i in range(2, m+1):
         if (n % i == 0):
             return False
     return True
+
+def ggt(a, b):
+    groesser = 0
+    kleiner = 0
+    if a > b:
+        groesser = a
+        kleiner = b
+    else:
+        groesser = b
+        kleiner = a
+    while(groesser % kleiner != 0):
+        rest = groesser % kleiner
+        groesser = kleiner
+        kleiner = rest
+    print("Der ggt ist: ", kleiner)
 
 def main():
     zaehle()
@@ -74,5 +90,8 @@ def main():
     print()
     zaehle_zeichen("Steffen", 's')
     print()
+    print(ist_prim(13))
+    print()
+    ggt(225, 60)
 
 main()
