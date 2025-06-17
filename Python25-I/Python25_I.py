@@ -1,37 +1,65 @@
+
+# - - - Infos / Bücher / Links - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Buch  Programmieren mit Python (westermann)  Kapitel 7.4  Vererbung
+# Buch  Python 3 Crashkurs (dpunkt.verlag)     Kapitel 9    Klassen / Vererbung
+# Link  https://openbook.rheinwerk-verlag.de/python/21_002.html#u21.2
+
+
+# - - - Definitionen - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+class VerbrennerAuto:
+    def __init__(self, hersteller, modell, farbe, kraftstoff):
+        self.__hersteller = hersteller
+        self.__modell = modell
+        self.__farbe = farbe
+        self.__kraftstoff = kraftstoff
+    
+    def set_farbe(self, value):
+        if type(value) == str:
+            self.__farbe = value
+        else:
+            print("Keine gültige Farbe!")
+    
+    def get_kraftstoff(self):
+        return self.__kraftstoff
+
+    def __str__(self):
+        text = self.__hersteller + " " + self.__modell + " | "
+        text += self.__farbe + " | "
+        text += self.get_kraftstoff()
+        return text
+
+class ElektroAuto:
+    def __init__(self, hersteller, modell, farbe, batterie_kWh):
+        self.__hersteller = hersteller
+        self.__modell = modell
+        self.__farbe = farbe
+        self.__batterie_kWh = batterie_kWh
+    
+    def set_farbe(self, value):
+        if type(value) == str:
+            self.__farbe = value
+        else:
+            print("Keine gültige Farbe!")
+    
+    def get_batterie_kWh(self):
+        return self.__batterie_kWh
+
+    def __str__(self):
+        text = self.__hersteller + " " + self.__modell + " | "
+        text += self.__farbe + " | "
+        text += str(self.get_batterie_kWh()) + " kWh"
+        return text
+
+
+# - - - Test-Code / Demonstration  - - - - - - - - - - - - - - - - - - - - - - -
+
 def main():
-    haus = Mietshaus()
-    wohnung1 = Wohnung(1000)
-    wohnung2 = Wohnung(840)
-    haus.add_wohnung(wohnung1)
-    haus.add_wohnung(wohnung2)
-    haus.add_wohnungspreis(1200)
-    print(haus.get_Gesamtmiete())
-    
-class Mietshaus:
-    
-    def __init__(self):
-        self.__wohnungsliste = []
-        
-    def add_wohnung(self, wohnung):
-        if type(wohnung) == Wohnung:
-            self.__wohnungsliste.append(wohnung)
-            
-    def add_wohnungspreis(self, preis):
-        if type(preis) == int:
-            self.__wohnungsliste.append(Wohnung(preis))
-            
-    def get_Gesamtmiete(self):
-        summe = 0
-        for wohnung in self.__wohnungsliste:
-            summe += wohnung.get_miete()
-        return summe
-        
-class Wohnung:
-    
-    def __init__(self, miete):
-        self.__miete = miete
-        
-    def get_miete(self):
-        return self.__miete
+    verbrenner = VerbrennerAuto("Opel", "Corsa", "schwarz", "Benzin")
+    elektro = ElektroAuto("Tesla", "Model S", "weiß", 85)
+
+    print(verbrenner)
+    print(elektro)
 
 main()
