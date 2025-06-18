@@ -1,65 +1,61 @@
 
 # - - - Infos / Bücher / Links - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# Buch  Programmieren mit Python (westermann)  Kapitel 7.4  Vererbung
-# Buch  Python 3 Crashkurs (dpunkt.verlag)     Kapitel 9    Klassen / Vererbung
-# Link  https://openbook.rheinwerk-verlag.de/python/21_002.html#u21.2
+# Buch  Programmieren mit Python (westermann)  Kapitel 7.5  Abstrakte Klassen und Interfaces
+# Link  https://www.datacamp.com/de/tutorial/python-abstract-classes
 
 
 # - - - Definitionen - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-class Auto:
-    def __init__(self, hersteller, modell, farbe):
-        self.__hersteller = hersteller
-        self.__modell = modell
+from abc import ABC, abstractmethod
+
+# 'Tier' ist eine abstrakte Klasse, weil:
+# - erbt von ABC
+# - eine abstrakte Methode enthält (@abstractmethod)
+class Tier(ABC):
+    def __init__(self, farbe):
         self.__farbe = farbe
+
+    @abstractmethod
+    def mach_geraeusch(self):
+        print("Das Tier macht Geräusche.")
     
-    def set_farbe(self, value):
-        if type(value) == str:
-            self.__farbe = value
-        else:
-            print("Keine gültige Farbe!")
+    def hallo(self):
+        print("Hallo, ich bin ein Tier.")
+
+# 'Hund' ist eine reguläre Klasse.
+# Da diese von der abstrakten 'Tier' erbt, muss 'Hund' die
+# abstrakte Methode 'mach_geraeusch()' implmentieren.
+class Hund(Tier):
+    def mach_geraeusch(self):
+        super().mach_geraeusch()
+        print("Der Hund bellt.")
+
+class Katze(Tier):
+    def mach_geraeusch(self):
+        print("Die Katze miaut.")
     
-    def __str__(self):
-        text = self.__hersteller + " " + self.__modell + " | "
-        text += self.__farbe + " | "
-        return text
+    def hallo(self):
+        print("Hallo, ich bin eine Katze.")
 
-
-class VerbrennerAuto(Auto):
-    def __init__(self, hersteller, modell, farbe, kraftstoff):
-        super().__init__(hersteller, modell, farbe)
-        self.__kraftstoff = kraftstoff
-    
-    def get_kraftstoff(self):
-        return self.__kraftstoff
-
-    def __str__(self):
-        text = super().__str__()
-        text += self.get_kraftstoff()
-        return text
-
-class ElektroAuto(Auto):
-    def __init__(self, hersteller, modell, farbe, batterie_kWh):
-        super().__init__(hersteller, modell, farbe)
-        self.__batterie_kWh = batterie_kWh
-    
-    def get_batterie_kWh(self):
-        return self.__batterie_kWh
-
-    def __str__(self):
-        text = super().__str__()
-        text += str(self.get_batterie_kWh()) + " kWh"
-        return text
-
+class Maus(Tier):
+    def mach_geraeusch(self):
+        print("Die Maus piept.")
 
 # - - - Test-Code / Demonstration  - - - - - - - - - - - - - - - - - - - - - - -
 
 def main():
-    verbrenner = VerbrennerAuto("Opel", "Corsa", "schwarz", "Benzin")
-    elektro = ElektroAuto("Tesla", "Model S", "weiß", 85)
+    # tier = Tier()     # wirft einen Fehler, da Instanzen von abstrakten Klassen nicht erlaubt sind
+    hund = Hund("weiß")
+    katze = Katze("schwarz")
+    maus = Maus("grau")
 
-    print(verbrenner)
-    print(elektro)
+    hund.mach_geraeusch()
+    hund.hallo()
+    
+    katze.mach_geraeusch()
+    katze.hallo()
+
+    maus.mach_geraeusch()
 
 main()
