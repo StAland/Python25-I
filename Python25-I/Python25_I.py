@@ -2,61 +2,64 @@
 # - - - Infos / Bücher / Links - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Buch  Programmieren mit Python (westermann)  Kapitel 7.5  Abstrakte Klassen und Interfaces
-# Link  https://www.datacamp.com/de/tutorial/python-abstract-classes
 
 
 # - - - Definitionen - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 from abc import ABC, abstractmethod
 
-# 'Tier' ist eine abstrakte Klasse, weil:
+# 'IUsbSpeicher' ist ein Interface (ein Spezialfall einer abstrakten Klasse), weil:
 # - erbt von ABC
-# - eine abstrakte Methode enthält (@abstractmethod)
-class Tier(ABC):
+# - enthält ausschließlich abstrakte Methoden
+class IUsbSpeicher(ABC):
     @abstractmethod
-    def __init__(self, farbe, alter):
-        self.__farbe = farbe
-        self.__alter = alter
+    def pruefe_speicher(self):
+        pass
 
     @abstractmethod
-    def mach_geraeusch(self):
-        print("Das Tier macht Geräusche.")
+    def pruefe_usb(self):
+        pass
+
+# 'Notebook' ist eine reguläre Klasse
+# Da diese von 'IUsbSpeicher' erbt, muss 'Notebook' alle
+# abstrakten Methoden implementieren.
+class Notebook(IUsbSpeicher):
+    def pruefe_speicher(self):
+        return True             # besitzt Speicher, z.B. Festplatte
     
-    def hallo(self):
-        print("Hallo, ich bin", self.__farbe, "und", self.__alter, "Jahre alt.")
+    def pruefe_usb(self):
+        return True             # besitzt eine USB-Schnittstelle
 
-# 'Hund' ist eine reguläre Klasse.
-# Da diese von der abstrakten 'Tier' erbt, muss 'Hund' die
-# abstrakte Methode 'mach_geraeusch()' implmentieren.
-class Hund(Tier):
-    def __init__(self, farbe, alter):
-        super().__init__(farbe, alter)
 
-    def mach_geraeusch(self):
-        super().mach_geraeusch()
-        print("Der Hund bellt.")
-
-# Der 'SchwarzeHund' ist eine reguläre Klasse und erbt alles von 'Hund' und 'Tier'.
-# Da die Farbe durch den Namen der Klasse quasi schon vorgegeben ist,
-# implemtieren wir hier einen neuen Konstruktor der nur noch das Alter akzeptiert.
-# Beim Aufruf des Konstrukturs der Eltern-Klasse 'Hund' (super().__init()) wird 
-# für die Farbe fest der Wert 'schwarz' übergeben und das Alter weitergeleitet.
-class SchwarzerHund(Hund):
-    def __init__(self, alter):
-        super().__init__("schwarz", alter)
-
+class Digitalkamera(IUsbSpeicher):
+    def pruefe_speicher(self):
+        return True             # besitzt Speicher, z.B. SD-Card
+    
+    def pruefe_usb(self):
+        return False            # aber keine USB-Schnittstelle
+    
 
 # - - - Test-Code / Demonstration  - - - - - - - - - - - - - - - - - - - - - - -
 
 def main():
-    # tier = Tier()     # wirft einen Fehler, da Instanzen von abstrakten Klassen nicht erlaubt sind
-    hund = Hund("weiß", 7)
-    schwarzer_hund = SchwarzerHund(2)
+    print("Datenübertragung per USB wird vorbereitet...")
+    print("Um Daten zu übertragen, bitte ein passendes Gerät verbinden!")
 
-    hund.hallo()
-    hund.mach_geraeusch()
+    geraet = Digitalkamera()
 
-    schwarzer_hund.hallo()
-    schwarzer_hund.mach_geraeusch()
+    # prüfe auf Speicher
+    speicher_vorhanden = geraet.pruefe_speicher()
+    if speicher_vorhanden:
+        print("Speicher ist vorhanden")
+    
+    # prüfe auf USB-Verbindung
+    usb_vorhanden = geraet.pruefe_usb()
+    if usb_vorhanden:
+        print("USB Vebrindung ist vorhanden")
+    
+    if speicher_vorhanden and usb_vorhanden:
+        print("Daten werden übertragen...")
+    else:
+        print("Fehler: Daten können nicht übertragen werden!")
 
 main()
