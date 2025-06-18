@@ -4,52 +4,86 @@
 # Buch  Programmieren mit Python (westermann)  Kapitel 7.6  Mehrfachvererbung
 # Link  https://openbook.rheinwerk-verlag.de/python/21_002.html#u21.2.5
 # Link  https://openbook.rheinwerk-verlag.de/oop/oop_kapitel_05_004.htm#mj4744a80ac0ff520167d0124d73dba2b2
-
+# Link  https://de.wikipedia.org/wiki/Mehrfachvererbung
 
 # - - - Definitionen - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-class Tier:
-    pass
+from abc import ABC, abstractmethod
 
-class Hund(Tier):
-    pass
+# 'IUsbSpeicher' ist ein Interface (ein Spezialfall einer abstrakten Klasse), weil:
+# - erbt von ABC
+# - enthält ausschließlich abstrakte Methoden
+class IUsbSpeicher(ABC):
+    @abstractmethod
+    def pruefe_speicher(self):
+        pass
 
-class SchwarzenHund(Hund):      # KEINE Mehrfachvererbung !!!
-    pass
+    @abstractmethod
+    def pruefe_usb(self):
+        pass
 
+class IName(ABC):
+    @abstractmethod
+    def get_name(self):
+        pass
 
-class Basis_1:
-    def methode(self):
-        print("methode von Basis_1")
+class IHdmi(ABC):
+    @abstractmethod
+    def pruefe_hdmi(self):
+        pass
 
-class Basis_2:
-    def methode(self):
-        print("methode von Basis_2")
-
-class AbgeleiteteKlasse(Basis_2, Basis_1):      # 'echte' Mehrverfachvererbung
-    def methode(self):
-        Basis_1.methode(self)
-
-class C:
-    def __init__(self):
-        self.__basis_1 = Basis_1()      # keine Mehrverfachvererbung
-        self.__basis_2 = Basis_2()      # alternative Implementierung als Komposition
+# 'Notebook' ist eine reguläre Klasse
+# Da diese von 'IUsbSpeicher' erbt, muss 'Notebook' alle
+# abstrakten Methoden implementieren.
+class Notebook(IUsbSpeicher, IName, IHdmi):
+    def pruefe_speicher(self):
+        return True             # besitzt Speicher, z.B. Festplatte
     
-    def methode(self):
-        self.__basis_1.methode()
+    def pruefe_usb(self):
+        return True             # besitzt eine USB-Schnittstelle
+    
+    def get_name(self):
+        return "Notebook"
+    
+    def pruefe_hdmi(self):
+        return True
 
-    def methode_2(self):
-        self.__basis_2.methode()
 
+class Digitalkamera(IUsbSpeicher, IName):
+    def pruefe_speicher(self):
+        return True             # besitzt Speicher, z.B. SD-Card
+    
+    def pruefe_usb(self):
+        return False            # aber keine USB-Schnittstelle
+    
+    def get_name(self):
+        return "Digitalkamera"
+    
 
 # - - - Test-Code / Demonstration  - - - - - - - - - - - - - - - - - - - - - - -
 
 def main():
-    abgeleitete_klasse = AbgeleiteteKlasse()
-    abgeleitete_klasse.methode()
+    print("Datenübertragung per USB wird vorbereitet...")
+    print("Um Daten zu übertragen, bitte ein passendes Gerät verbinden!")
 
-    c = C()
-    c.methode()
-    c.methode_2()
+    geraet = Notebook()
+
+    # identifiziere Gerät
+    print("Folgendes Gerät wurde angeschlossen", geraet.get_name())
+
+    # prüfe auf Speicher
+    speicher_vorhanden = geraet.pruefe_speicher()
+    if speicher_vorhanden:
+        print("Speicher ist vorhanden")
+    
+    # prüfe auf USB-Verbindung
+    usb_vorhanden = geraet.pruefe_usb()
+    if usb_vorhanden:
+        print("USB Vebrindung ist vorhanden")
+    
+    if speicher_vorhanden and usb_vorhanden:
+        print("Daten werden übertragen...")
+    else:
+        print("Fehler: Daten können nicht übertragen werden!")
 
 main()
